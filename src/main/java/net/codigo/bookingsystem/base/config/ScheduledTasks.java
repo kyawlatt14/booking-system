@@ -15,9 +15,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ScheduledTasks {
     private final PurchaseService purchaseService;
-
     @Async
-    @Scheduled(fixedRate = 600000) // 300,000 milliseconds = 10 minutes -- to test local --
+    @Scheduled(fixedRate = 600000) // 300,000 milliseconds = 5 minutes -- to test local --
     public void updateStatus() {
         String message = purchaseService.findByStatus(Status.STILL);
         log.info("Message : {}",message);

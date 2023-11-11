@@ -23,6 +23,8 @@ import static net.codigo.bookingsystem.purchase.PurchaseMapper.*;
 @Transactional
 public class PurchaseService {
     private final PurchaseRepository purchaseRepository;
+
+    @CacheEvict(value = "purchaseList", key = "'all'")
     public CodigoResponse createPurchase(PurchaseRequest purchaseRequest) {
         var existed = purchaseRepository.findByCountryAndName(purchaseRequest.getCountry().toUpperCase(),purchaseRequest.getName().toUpperCase());
         Purchase purchase ;
