@@ -40,12 +40,13 @@ public class AuthenticationService {
         if(!ObjectUtils.isEmpty(existed))
             throw new ApplicationErrorException(Constant.USER_EXISTED);
         var user = User.builder()
-                .username(request.getUsername())
+                .name(request.getUsername())
                 .phone(request.getPhone())
                 .email(request.getEmail())
                 .address(request.getAddress())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .createAt(DateUtils.getNowDate())
                 .country(request.getCountry().toUpperCase())
                 .build();
         var savedUser = repository.save(user);

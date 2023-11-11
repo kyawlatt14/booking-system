@@ -9,9 +9,12 @@ import net.codigo.bookingsystem.base.repository.BookingRepository;
 import net.codigo.bookingsystem.base.repository.PurchaseRepository;
 import net.codigo.bookingsystem.base.repository.UserRepository;
 import net.codigo.bookingsystem.base.utils.DateUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static net.codigo.bookingsystem.booking.BookingMapper.entityListToBookingDTOList;
 import static net.codigo.bookingsystem.booking.BookingMapper.entityToBookingDTO;
 
 @Service
@@ -23,11 +26,12 @@ public class BookingService {
     private final UserRepository userRepository;
     private final PurchaseRepository purchaseRepository;
 
+    @CacheEvict(value = "bookings", key = "'all'")
     public CodigoResponse createBooking(BookingRequest bookingRequest) {
         Booking booking;
         if(bookingRequest.getPurchaseDTO().getExpirationDate()> DateUtils.getNowDate() &&
                 bookingRequest.getUserDTO().getCountry().equals(bookingRequest.getPurchaseDTO().getCountry())){
-            if(bookingRequest.getPurchaseDTO().getCredits() >= bookingRepository.countByPurchaseId(bookingRequest.getPurchaseDTO().getId()))
+            if(bookingRequest.getPurchaseDTO().getBookingLimit() > bookingRepository.countByPurchaseId(bookingRequest.getPurchaseDTO().getId()))
                 booking = saveBooking(bookingRequest);
             else
                 booking = waitBooking(bookingRequest);
@@ -46,6 +50,7 @@ public class BookingService {
                 .bookingTime(DateUtils.getNowDate())
                 .isWaitListed(true)
                 .isCheckedIn(false)
+                .depositCredits(0)
                 .build());
         user.add(savebooking);
         purchase.add(savebooking);
@@ -61,9 +66,16 @@ public class BookingService {
                 .bookingTime(DateUtils.getNowDate())
                 .isWaitListed(false)
                 .isCheckedIn(false)
+                .depositCredits(1)
                 .build());
         user.add(savebooking);
         purchase.add(savebooking);
         return savebooking;
+    }
+
+    @Cacheable(value = "bookings", key = "'all'")
+    public CodigoResponse getAll() {
+        var bookings = bookingRepository.findAll();
+        return CodigoResponse.success(Constant.GET_ALL,entityListToBookingDTOList(bookings));
     }
 }

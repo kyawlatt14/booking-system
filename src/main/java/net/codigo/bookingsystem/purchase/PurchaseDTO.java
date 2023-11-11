@@ -17,4 +17,6 @@ public class PurchaseDTO implements Serializable {
     private long expirationDate;
     private long createAt;
     private Status status;
+    private int bookingLimit;
+
 }

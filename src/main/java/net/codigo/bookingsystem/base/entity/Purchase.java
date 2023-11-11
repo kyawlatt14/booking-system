@@ -21,6 +21,7 @@ public class Purchase {
     private Long id;
     private String name;
     private int credits;
+    private int bookingLimit;
     private BigDecimal price;
     private String country;
     private long expirationDate;

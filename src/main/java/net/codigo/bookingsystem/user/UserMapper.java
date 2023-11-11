@@ -13,7 +13,7 @@ public class UserMapper {
     public static UserDTO entityToUserDTO(User user){
         return UserDTO.builder()
                 .id(user.getId())
-                .username(user.getUsername())
+                .username(user.getName())
                 .address(user.getAddress())
                 .phone(user.getPhone())
                 .email(user.getEmail())
@@ -38,6 +38,14 @@ public class UserMapper {
                 .country(user.getCountry())
                 .createAt(user.getCreateAt())
                 .build();
+    }
+
+    public static List<UserDTO> entityListToUserDTOList(List<User> users){
+        List<UserDTO> userDTOS = new ArrayList<>();
+        users.forEach(user -> {
+            userDTOS.add(entityToUserDTO(user));
+        });
+        return userDTOS;
     }
 
 

@@ -17,6 +17,7 @@ public class PurchaseMapper {
                 .expirationDate(purchase.getExpirationDate())
                 .price(purchase.getPrice())
                 .createAt(purchase.getCreateAt())
+                .bookingLimit(purchase.getBookingLimit())
                 .status(purchase.getStatus())
                 .build();
     }
@@ -29,6 +30,7 @@ public class PurchaseMapper {
                 .expirationDate(DateUtils.stringToLongDate(purchaseRequest.getExpirationDate()))
                 .price(purchaseRequest.getPrice())
                 .createAt(DateUtils.getNowDate())
+                .bookingLimit(5)
                 .status(Status.STILL)
                 .build();
     }

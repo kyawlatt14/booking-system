@@ -9,7 +9,7 @@ public class Constant {
     public static final String USER_EXISTED = "User existed in system.";
     public static final String USER_REGISTERED = "User registered in system.";
     public static final String AUTH_SUCCESS = "You are authenticated in system.";
-    public static final String USER_FETCHED = "User's profile fetched in system.";
+    public static final String USER_FETCHED = "User's data fetched in system.";
     public static final String USER_NOT_FOUND = "User not found in system.";
     public static final String USER_NOT_ALLOW = "User not allow to the booking because purchase is expired (Or) Your location not allow to buy the purchase.";
 
