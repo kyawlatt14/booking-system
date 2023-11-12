@@ -23,13 +23,13 @@ public class PurchaseController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('admin:create')")
+    @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<CodigoResponse> updatePurchase(@RequestBody PurchaseRequest purchaseRequest){
         return ResponseEntity.ok(purchaseService.updatePurchase(purchaseRequest));
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('admin:create','user:create')")
+    @PreAuthorize("hasAnyAuthority('admin:read','user:read')")
     public ResponseEntity<CodigoResponse> getAll(){
         return ResponseEntity.ok(purchaseService.getAll());
     }

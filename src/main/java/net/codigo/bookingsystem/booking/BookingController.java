@@ -16,10 +16,12 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('admin:create','user:create')")
     public ResponseEntity<CodigoResponse> createBooking(@RequestBody BookingRequest bookingRequest){
         return ResponseEntity.ok(bookingService.createBooking(bookingRequest));
     }
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('admin:read','user:read')")
     public ResponseEntity<CodigoResponse> getAll(){
         return ResponseEntity.ok(bookingService.getAll());
     }
