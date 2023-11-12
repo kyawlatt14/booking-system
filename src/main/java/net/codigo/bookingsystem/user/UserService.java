@@ -71,6 +71,8 @@ public class UserService {
             booking.setWaitListed(true);
             bookingRepository.save(booking);
         }
+        if(booking.getPurchase().getExpirationDate() < DateUtils.getNowDateMinuteHour(4))
+            throw new ApplicationErrorException(Constant.REFUND_NO_PAID);
         boolean flat = PaymentCharge(booking.isWaitListed(),booking.isCheckedIn());
         if(!flat){
             var addBooking = bookingRepository.findByPurchaseIdAndIsWaitListedTrueAndIsCheckedInFalse(purchaseId);
