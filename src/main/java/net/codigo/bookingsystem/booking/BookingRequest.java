@@ -13,4 +13,5 @@ public class BookingRequest {
     private long bookingTime;
     private boolean isWaitListed;
     private boolean isCheckedIn;
+    private int depositCredits;
 }

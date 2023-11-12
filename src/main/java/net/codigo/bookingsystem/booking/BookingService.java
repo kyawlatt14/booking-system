@@ -62,14 +62,19 @@ public class BookingService {
         var purchase = purchaseRepository.findById(bookingRequest.getPurchaseDTO().getId()).orElseThrow();
         if(bookingRepository.existsByUserIdAndPurchaseId(user.getId(),purchase.getId()))
             throw new ApplicationErrorException(Constant.BOOKING_EXISTED);
-        var savebooking = bookingRepository.save(Booking.builder()
-                .bookingTime(DateUtils.getNowDate())
-                .isWaitListed(false)
-                .isCheckedIn(false)
-                .depositCredits(1)
-                .build());
-        user.add(savebooking);
-        purchase.add(savebooking);
+        boolean flat = AddPaymentCard(bookingRequest.getDepositCredits());
+        Booking savebooking;
+        if(flat){
+            savebooking = bookingRepository.save(Booking.builder()
+                    .bookingTime(DateUtils.getNowDate())
+                    .isWaitListed(false)
+                    .isCheckedIn(false)
+                    .depositCredits(1)
+                    .build());
+            user.add(savebooking);
+            purchase.add(savebooking);
+        }else
+            throw new ApplicationErrorException("Payment fail.");
         return savebooking;
     }
 
@@ -77,5 +82,9 @@ public class BookingService {
     public CodigoResponse getAll() {
         var bookings = bookingRepository.findAll();
         return CodigoResponse.success(Constant.GET_ALL,entityListToBookingDTOList(bookings));
+    }
+
+    public boolean AddPaymentCard( int credit ){
+        return credit == 1;
     }
 }
