@@ -8,7 +8,6 @@ import net.codigo.bookingsystem.base.entity.Booking;
 import net.codigo.bookingsystem.base.entity.Purchase;
 import net.codigo.bookingsystem.base.exception.ApplicationErrorException;
 import net.codigo.bookingsystem.base.repository.BookingRepository;
-import net.codigo.bookingsystem.base.repository.PurchaseRepository;
 import net.codigo.bookingsystem.base.repository.UserRepository;
 import net.codigo.bookingsystem.base.utils.DateUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +29,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final BookingRepository bookingRepository;
-    private final PurchaseRepository purchaseRepository;
 
     public CodigoResponse getProfile(Long userId) {
         var existedUser = userRepository.findById(userId).orElseThrow(
@@ -87,8 +85,6 @@ public class UserService {
     }
 
     public boolean PaymentCharge(boolean a,boolean b){
-        if(a&b)
-            return false;
-        return true;
+        return !(a & b);
     }
 }
