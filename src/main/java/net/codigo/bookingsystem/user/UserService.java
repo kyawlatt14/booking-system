@@ -65,7 +65,8 @@ public class UserService {
 
     public CodigoResponse refundBooking(Long userId, Long purchaseId) {
         var booking = bookingRepository.findByPurchaseIdAndUserId(purchaseId,userId).orElseThrow();
-        if(booking.getPurchase().getExpirationDate() > DateUtils.getNowDate()){
+        if(booking.getPurchase().getExpirationDate() < DateUtils.getNowDate() &&
+                booking.getPurchase().getExpirationDate() > DateUtils.getNowDateMinuteHour(4)){
             booking.setCheckedIn(true);
             booking.setWaitListed(true);
             bookingRepository.save(booking);
@@ -77,7 +78,7 @@ public class UserService {
                 if(booking.getPurchase().getBookingLimit() > bookingRepository.countByPurchaseIdAndIsWaitListedFalse(purchaseId)){
                     booking1.setWaitListed(false);
                     booking1.setCheckedIn(false);
-                    booking1.setDepositCredits(1);
+                    booking1.setDepositCredits(0);
                 }
             }
         }
@@ -87,4 +88,5 @@ public class UserService {
     public boolean PaymentCharge(boolean a,boolean b){
         return !(a & b);
     }
+
 }

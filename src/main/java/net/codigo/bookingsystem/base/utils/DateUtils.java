@@ -8,8 +8,26 @@ public class DateUtils {
         return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
     }
 
+    public static String getNowStringMinuteHour(int hour) {
+        Date currentDate = new Date();
+        long modifiedTime = currentDate.getTime() - (4 * 60 * 60 * 1000);
+        Date modifiedDate = new Date(modifiedTime);
+        return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(modifiedDate);
+    }
+
     public static long getNowDate() {
         String nowDate = getNowString();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long date = 0;
+        try {
+            date =simpleDateFormat.parse(nowDate).getTime()/1000;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return date;
+    }
+    public static long getNowDateMinuteHour(int hour) {
+        String nowDate = getNowStringMinuteHour(hour);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long date = 0;
         try {
