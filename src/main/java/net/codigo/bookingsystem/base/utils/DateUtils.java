@@ -10,7 +10,7 @@ public class DateUtils {
 
     public static String getNowStringMinuteHour(int hour) {
         Date currentDate = new Date();
-        long modifiedTime = currentDate.getTime() - (4 * 60 * 60 * 1000);
+        long modifiedTime = currentDate.getTime() - (hour * 60 * 60 * 1000);
         Date modifiedDate = new Date(modifiedTime);
         return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(modifiedDate);
     }
