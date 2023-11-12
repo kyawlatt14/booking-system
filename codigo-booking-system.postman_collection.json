@@ -190,7 +190,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJreWF3bGF0dDE0OTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5OTcyMzIyMiwiZXhwIjoxNjk5ODA5NjIyfQ.LlJcjcOlyjsCk537FC2bTlwfJ0d_830y_XOYFmvGNFA",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJreWF3bGF0dDE0OTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5OTc2MTEzNywiZXhwIjoxNjk5ODQ3NTM3fQ.2v_IAY5y-S_TZ0Okygq4TvdTvTEFM-0hk9dLObO0qFk",
 									"type": "string"
 								}
 							]
@@ -250,6 +250,47 @@
 								{
 									"key": "id",
 									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refundBooking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJreWF3bGF0dDE0OTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5OTc2MTEzNywiZXhwIjoxNjk5ODQ3NTM3fQ.2v_IAY5y-S_TZ0Okygq4TvdTvTEFM-0hk9dLObO0qFk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:9090/api/v1/user/refundBooking?user-id=2&purchase-id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"refundBooking"
+							],
+							"query": [
+								{
+									"key": "user-id",
+									"value": "2"
+								},
+								{
+									"key": "purchase-id",
+									"value": "1"
 								}
 							]
 						}
@@ -382,7 +423,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJreWF3bGF0dDE0OTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5OTcyMzIyMiwiZXhwIjoxNjk5ODA5NjIyfQ.LlJcjcOlyjsCk537FC2bTlwfJ0d_830y_XOYFmvGNFA",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJreWF3bGF0dDE0OTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5OTc2MTEzNywiZXhwIjoxNjk5ODQ3NTM3fQ.2v_IAY5y-S_TZ0Okygq4TvdTvTEFM-0hk9dLObO0qFk",
 									"type": "string"
 								}
 							]
@@ -391,7 +432,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userDTO\":{\r\n        \"id\":11,        \r\n        \"country\":\"MYANMAR\"\r\n    },\r\n    \"purchaseDTO\":{\r\n        \"id\":1,\r\n        \"bookingLimit\":5,\r\n        \"country\":\"MYANMAR\",\r\n        \"expirationDate\":\"1699770330\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"userDTO\":{\r\n        \"id\":7,        \r\n        \"country\":\"SINGAPORE\"\r\n    },\r\n    \"purchaseDTO\":{\r\n        \"id\":2,\r\n        \"bookingLimit\":5,\r\n        \"country\":\"SINGAPORE\",\r\n        \"expirationDate\":\"1699770330\"        \r\n    },\r\n    \"depositCredits\":6\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
