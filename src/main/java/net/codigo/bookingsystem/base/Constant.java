@@ -27,6 +27,7 @@ public class Constant {
     public static final String BOOKING_SAVE = "Booking successfully inserted in system.";
     public static final String BOOKING_WAIT = "Wait for booking.";
     public static final String BOOKING_EXISTED = "Booking existed in system";
-
+    public static final String REFUND_PAID = "Paid credits to customer.";
+    public static final String REFUND_NO_PAID = "No paid credits to customer.";
     /*booking*/
 }

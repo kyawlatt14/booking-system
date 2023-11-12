@@ -35,5 +35,11 @@ public class UserController {
         return ResponseEntity.ok(userService.changePassword(registerRequest));
     }
 
+    @PostMapping("refundBooking")
+    public ResponseEntity<CodigoResponse> refundBooking(@RequestParam (name = "user-id") Long userId,
+                                                        @RequestParam (name = "purchase-id") Long purchaseId){
+        return ResponseEntity.ok(userService.refundBooking(userId,purchaseId));
+    }
+
 
 }
